@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             var uid = FirebaseAuth.getInstance().currentUser!!.uid
             FirebaseStorage.getInstance().reference.child("userProfileImages").child(uid).putFile(imageUri!!).addOnCompleteListener {
                 task ->
-                var url = task.result.downloadUrl.toString()
+                var url = task.result?.downloadUrl.toString()
                 var map = HashMap<String,Any>()
                 map["image"] = url
                 FirebaseFirestore.getInstance().collection("profileImages").document(uid).set(map)

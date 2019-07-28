@@ -101,7 +101,7 @@ class CommentActivity : AppCompatActivity() {
             FirebaseFirestore.getInstance().collection("profileImages")?.document(comments[position].uid!!)?.get()?.addOnCompleteListener {
                 task ->
                 if(task.isSuccessful){
-                    var url = task.result["image"]
+                    var url = task.result!!["image"]
                     Glide.with(holder.itemView.context).load(url).apply(RequestOptions().circleCrop()).into(view.commentviewItem_imageview_profile)
                 }
             }

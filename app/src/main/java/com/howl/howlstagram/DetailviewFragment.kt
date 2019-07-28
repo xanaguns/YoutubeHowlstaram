@@ -50,7 +50,7 @@ class DetailviewFragment : Fragment() {
 
             firestore?.collection("users")?.document(uid!!)?.get()?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    var userDTO = task.result.toObject(FollowDTO::class.java)
+                    var userDTO = task.result?.toObject(FollowDTO::class.java)
                     if (userDTO != null) {
                         getCotents(userDTO.followings)
                     }
@@ -104,7 +104,7 @@ class DetailviewFragment : Fragment() {
             firestore?.collection("profileImages")?.document(contentDTOs[position].uid!!)?.get()?.addOnCompleteListener {
                 task ->
                 if(task.isSuccessful){
-                    var url = task.result["image"]
+                    var url = task.result!!["image"]
                     Glide.with(holder.itemView.context).load(url).apply(RequestOptions().circleCrop()).into(viewHolder.detailviewitem_profile_image)
                 }
             }

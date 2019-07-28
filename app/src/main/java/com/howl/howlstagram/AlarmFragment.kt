@@ -79,7 +79,7 @@ class AlarmFragment : Fragment() {
 
             FirebaseFirestore.getInstance().collection("profileImages")?.document(alarmDTOlist[position].uid!!)?.get()?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    var url = task.result["image"]
+                    var url = task.result!!["image"]
                     Glide.with(holder.itemView.context).load(url).apply(RequestOptions().circleCrop()).into(profileImage)
                 }
             }
